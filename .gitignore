@@ -2,3 +2,11 @@ __pycache__/
 IMG_CLASSES.zip
 IMG_CLASSES/
 dataset/
+train_model.keras
+train_model(1).keras
+labels.npy
+photos.npy
+main.ipynb
+dataset.zip
+tensorflow_env/
+tf_env/
