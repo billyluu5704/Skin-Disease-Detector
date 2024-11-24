@@ -24,11 +24,6 @@ import os
 from os import listdir
 from numpy import save
 from keras.models import load_model
-import sys
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from matplotlib.image import imread
-from shutil import copyfile
-from random import seed, random
 from Resnet import Resnet
 from PIL import Image
 import tkinter as tk
@@ -38,7 +33,7 @@ model_file = 'train_model.keras'
 model_name = Resnet()
 
 def recreate_model():
-    return model_name
+    return Resnet()
 
 def load_image(filename):
     img = load_img(filename, target_size=(224, 224))
@@ -61,13 +56,14 @@ def run_model():
     file = open_image()
     if file:
         print(f'File: {file} selected')
-        model = load_model(model_file, custom_objects={f'{model_name}': recreate_model()})
+        model = load_model(model_file, custom_objects={'Resnet': recreate_model()})
         img = load_image(file)
         pred = model.predict(img)
         result = np.argmax(pred, axis=1)
         return result[0]
     else:
         print('No file selected')
+
 
 result = run_model()
 diseases = ['Eczema', 'Melanoma', 'Atopic Dermatitis', 'Basel Cell Carcinoma',
